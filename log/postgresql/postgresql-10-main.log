@@ -1,0 +1,84 @@
+2017-12-27 04:44:15.960 UTC [19] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-27 04:44:15.961 UTC [19] LOG:  listening on IPv6 address "::", port 5432
+2017-12-27 04:44:15.963 UTC [19] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-27 04:44:15.974 UTC [20] LOG:  database system was interrupted; last known up at 2017-12-27 04:43:47 UTC
+2017-12-27 04:44:16.091 UTC [20] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-27 04:44:16.094 UTC [20] LOG:  invalid record length at 0/1E218A8: wanted 24, got 0
+2017-12-27 04:44:16.094 UTC [20] LOG:  redo is not required
+2017-12-27 04:44:16.104 UTC [19] LOG:  database system is ready to accept connections
+2017-12-27 04:44:16.657 UTC [27] [unknown]@[unknown] LOG:  incomplete startup packet
+
+2017-12-27 04:45:10.035 UTC [20] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-27 04:45:10.036 UTC [20] LOG:  listening on IPv6 address "::", port 5432
+2017-12-27 04:45:10.039 UTC [20] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-27 04:45:10.050 UTC [21] LOG:  database system was interrupted; last known up at 2017-12-27 04:44:16 UTC
+2017-12-27 04:45:10.157 UTC [21] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-27 04:45:10.160 UTC [21] LOG:  invalid record length at 0/1E21918: wanted 24, got 0
+2017-12-27 04:45:10.160 UTC [21] LOG:  redo is not required
+2017-12-27 04:45:10.170 UTC [20] LOG:  database system is ready to accept connections
+2017-12-27 04:45:10.732 UTC [28] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:36.696 UTC [20] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:36.697 UTC [20] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:36.702 UTC [20] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:36.715 UTC [21] LOG:  database system was interrupted; last known up at 2017-12-26 02:01:11 UTC
+2017-12-28 05:10:39.035 UTC [21] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:39.038 UTC [21] LOG:  redo starts at 0/1631A80
+2017-12-28 05:10:39.074 UTC [21] LOG:  invalid record length at 0/1E214B8: wanted 24, got 0
+2017-12-28 05:10:39.075 UTC [21] LOG:  redo done at 0/1E21020
+2017-12-28 05:10:39.075 UTC [21] LOG:  last completed transaction was at log time 2017-12-26 02:01:12.273807+00
+2017-12-28 05:10:39.169 UTC [20] LOG:  database system is ready to accept connections
+2017-12-28 05:10:39.699 UTC [28] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:43.514 UTC [19] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:43.514 UTC [19] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:43.518 UTC [19] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:43.528 UTC [20] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:39 UTC
+2017-12-28 05:10:43.643 UTC [20] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:43.646 UTC [20] LOG:  invalid record length at 0/1E21528: wanted 24, got 0
+2017-12-28 05:10:43.646 UTC [20] LOG:  redo is not required
+2017-12-28 05:10:43.657 UTC [19] LOG:  database system is ready to accept connections
+2017-12-28 05:10:44.210 UTC [27] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:46.739 UTC [20] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:46.739 UTC [20] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:46.743 UTC [20] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:46.754 UTC [21] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:43 UTC
+2017-12-28 05:10:46.929 UTC [21] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:46.933 UTC [21] LOG:  invalid record length at 0/1E21598: wanted 24, got 0
+2017-12-28 05:10:46.933 UTC [21] LOG:  redo is not required
+2017-12-28 05:10:46.948 UTC [20] LOG:  database system is ready to accept connections
+2017-12-28 05:10:47.532 UTC [28] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:50.082 UTC [19] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:50.082 UTC [19] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:50.085 UTC [19] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:50.097 UTC [20] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:46 UTC
+2017-12-28 05:10:50.223 UTC [20] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:50.226 UTC [20] LOG:  invalid record length at 0/1E21608: wanted 24, got 0
+2017-12-28 05:10:50.226 UTC [20] LOG:  redo is not required
+2017-12-28 05:10:50.237 UTC [19] LOG:  database system is ready to accept connections
+2017-12-28 05:10:50.782 UTC [27] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:53.744 UTC [21] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:53.745 UTC [21] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:53.748 UTC [21] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:53.759 UTC [22] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:50 UTC
+2017-12-28 05:10:53.872 UTC [22] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:53.875 UTC [22] LOG:  invalid record length at 0/1E21678: wanted 24, got 0
+2017-12-28 05:10:53.876 UTC [22] LOG:  redo is not required
+2017-12-28 05:10:53.886 UTC [21] LOG:  database system is ready to accept connections
+2017-12-28 05:10:54.443 UTC [29] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:10:58.212 UTC [19] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:10:58.213 UTC [19] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:10:58.216 UTC [19] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:10:58.227 UTC [20] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:53 UTC
+2017-12-28 05:10:58.343 UTC [20] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:10:58.346 UTC [20] LOG:  invalid record length at 0/1E216E8: wanted 24, got 0
+2017-12-28 05:10:58.346 UTC [20] LOG:  redo is not required
+2017-12-28 05:10:58.357 UTC [19] LOG:  database system is ready to accept connections
+2017-12-28 05:10:58.909 UTC [27] [unknown]@[unknown] LOG:  incomplete startup packet
+2017-12-28 05:11:04.267 UTC [19] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2017-12-28 05:11:04.267 UTC [19] LOG:  listening on IPv6 address "::", port 5432
+2017-12-28 05:11:04.270 UTC [19] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2017-12-28 05:11:04.281 UTC [20] LOG:  database system was interrupted; last known up at 2017-12-28 05:10:58 UTC
+2017-12-28 05:11:04.399 UTC [20] LOG:  database system was not properly shut down; automatic recovery in progress
+2017-12-28 05:11:04.402 UTC [20] LOG:  invalid record length at 0/1E21758: wanted 24, got 0
+2017-12-28 05:11:04.402 UTC [20] LOG:  redo is not required
+2017-12-28 05:11:04.412 UTC [19] LOG:  database system is ready to accept connections
+2017-12-28 05:11:04.959 UTC [27] [unknown]@[unknown] LOG:  incomplete startup packet
