@@ -114,3 +114,8 @@
 [Sun Dec 31 08:39:56.854831 2017] [:error] [pid 11] [client 172.18.0.4:48358] PHP Notice:  Array to string conversion in /var/www/html/index.php on line 123
 [Sun Dec 31 08:39:56.855174 2017] [:error] [pid 11] [client 172.18.0.4:48358] PHP Stack trace:
 [Sun Dec 31 08:39:56.855404 2017] [:error] [pid 11] [client 172.18.0.4:48358] PHP   1. {main}() /var/www/html/index.php:0
+[Thu Jan 11 22:39:05.747662 2018] [mpm_prefork:notice] [pid 6] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
+[Thu Jan 11 22:39:05.748479 2018] [core:notice] [pid 6] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND'
+[Fri Jan 12 02:01:02.740220 2018] [core:warn] [pid 6] AH00098: pid file /var/run/apache2/apache2.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Jan 12 02:01:02.745912 2018] [mpm_prefork:notice] [pid 6] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
+[Fri Jan 12 02:01:02.745940 2018] [core:notice] [pid 6] AH00094: Command line: '/usr/sbin/apache2 -D FOREGROUND'

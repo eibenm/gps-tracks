@@ -116,3 +116,6 @@
 172.18.0.4 - - [31/Dec/2017:09:02:36 +0000] "HEAD / HTTP/1.0" 200 147 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 172.18.0.4 - - [31/Dec/2017:20:11:13 +0000] "GET / HTTP/1.0" 200 44273 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
 172.18.0.4 - - [31/Dec/2017:20:11:36 +0000] "GET / HTTP/1.0" 200 44273 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+172.18.0.4 - - [11/Jan/2018:22:50:09 +0000] "GET / HTTP/1.0" 200 44273 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0"
+172.18.0.4 - - [11/Jan/2018:22:50:09 +0000] "GET /favicon.ico HTTP/1.0" 404 464 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0"
+172.18.0.4 - - [12/Jan/2018:02:09:00 +0000] "GET /favicon.ico HTTP/1.0" 404 464 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0"

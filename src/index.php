@@ -43,7 +43,7 @@ $db = 'docker';
 $username = 'docker';
 $password = 'docker';
 
-$dsn = "pgsql:host=$host;port=5432;dbname=$db;";
+$dsn = "pgsql:host={$host};port=5432;dbname={$db};";
 
 $opt = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -83,12 +83,12 @@ $stmt->execute();
 // Select from database
 
 $sql = "
-SELECT json_build_object(
-    'type', 'FeatureCollection',
-    'features', json_agg(json_build_object(
-        'type', 'Feature',
-        'geometry', results.geom::json,
-        'properties', results.properties::json
+SELECT jsonb_build_object(
+    'type',     'FeatureCollection',
+    'features', jsonb_agg(jsonb_build_object(
+        'type',       'Feature',
+        'geometry',   results.geom::jsonb,
+        'properties', results.properties
     ))
 )
 FROM (
@@ -96,7 +96,7 @@ FROM (
         ST_AsGeoJSON(geom) AS geom,
         properties AS properties
     FROM track_geoms
-    WHERE tid = (SELECT tid FROM track ORDER BY tid DESC LIMIT 1)
+    WHERE tid = 1
     ORDER BY geom_order
 ) results;
 ";
