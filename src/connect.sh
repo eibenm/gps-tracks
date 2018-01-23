@@ -16,6 +16,11 @@ docker container run --rm --name test -it \
     --network gpstracks_lamp-network \
     custom-php /bin/bash
 
+# CONNECT TO EXISTING CONTAINER _________________________________________________________
+
+docker exec -it gpstracks_webhost_1 /bin/bash
+docker exec -it gpstracks_react_1 /bin/sh
+
 # RUNNING PGADMIN 4 CONTAINER ___________________________________________________________
 
 docker pull dpage/pgadmin4

@@ -1,6 +1,7 @@
-.DS_Store
-
 # Keep these empty folders
 /log/*
 
 !/log/.gitkeep
+
+# misc
+.DS_Store

@@ -6,9 +6,21 @@ services:
     build: ./config/nginx
     image: custom-nginx
     ports:
-      - '80:80'
+      - '81:3000'
+      - '82:80'
     depends_on:
       - postgres
+      - webhost
+    networks:
+      - lamp-network
+    restart: unless-stopped
+
+  react:
+    build: ./config/react
+    image: custom-react
+    volumes:
+      - ./src/frontend:/usr/app
+    depends_on:
       - webhost
     networks:
       - lamp-network
@@ -19,7 +31,7 @@ services:
     image: custom-php
     volumes:
       - ./log/apache2:/var/log/apache2
-      - ./src:/var/www/html
+      - ./src/backend:/var/www/html
     depends_on:
       - postgres
     networks:

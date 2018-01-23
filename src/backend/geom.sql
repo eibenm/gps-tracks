@@ -96,8 +96,8 @@ WITH coords AS (
     SELECT ST_AsGeoJSON(geom)::jsonb->'coordinates' AS vals FROM track_geoms
 )
 SELECT
-	vals->0 AS lon,
-	vals->1 AS lat,
-	jsonb_build_array(vals->1, vals->0)
+    vals->0 AS lon,
+    vals->1 AS lat,
+    jsonb_build_array(vals->1, vals->0)
 FROM coords
 
