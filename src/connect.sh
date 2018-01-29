@@ -21,6 +21,11 @@ docker container run --rm --name test -it \
 docker exec -it gpstracks_webhost_1 /bin/bash
 docker exec -it gpstracks_react_1 /bin/sh
 
+# Add curl to nginx alpine
+# apk add --no-cache curl
+
+curl http://webhost/test.php
+
 # RUNNING PGADMIN 4 CONTAINER ___________________________________________________________
 
 docker pull dpage/pgadmin4

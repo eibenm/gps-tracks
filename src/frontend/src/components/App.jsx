@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import Map from './Map';
+import Test from '../containers/Test';
 
 class App extends Component {
   render() {
     return(
-      <Map />
+      <div>
+        <Map />
+        <Test />
+      </div>
     );
   }
 }
