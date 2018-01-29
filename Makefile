@@ -14,7 +14,7 @@ init-install: ## Setup local enviornment.  Also updates brews and npm/node.
 	@sh ./scripts/init.sh -b -n
 
 .PHONY: run
-run: ## Run the application.
+run: ## Run the application.  ( assumes "make init" has already been run )
 	@docker-compose up -d
 
 .PHONY: down

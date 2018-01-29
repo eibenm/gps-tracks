@@ -7,30 +7,21 @@ while getopts ":bnh" option
 do
     case "${option}"
     in
-    b) UPDATE_BREW=1;;
-    n) UPDATE_NODE=1;;
+    b) UPDATE_BREW=1 ;;
+    n) UPDATE_NODE=1 ;;
     h)
-      echo "Usage:"
-      echo "    init -h   Display help"
-      echo "    init -b   Update brew"
-      echo "    init -n   Update npm and node"
-      exit 0
-      ;;
+        echo "Usage:"
+        echo "    init -h   Display help"
+        echo "    init -b   Update brew"
+        echo "    init -n   Update npm and node"
+        exit 0
+        ;;
     \?)
-      echo "Invalid Option: -$OPTARG" 1>&2
-      exit 0
+        echo "Invalid Option: -$OPTARG" 1>&2
+        exit 0
+        ;;
     esac
 done
-
-if [ $UPDATE_BREW -eq 1 ]; then
-    echo "BREW!!!"
-fi
-
-if [ $UPDATE_NODE -eq 1 ]; then
-    echo "NODE!!!"
-fi
-
-exit 0
 
 # Text coloring
 GREEN='\033[1;32m'
@@ -90,7 +81,7 @@ function checkDockerForMac() {
 
 function checkNpm() {
     infocolorecho "Checking for npm..."
-    missing=0; brewInstalled=`npm help` || missing=1
+    missing=0; npmInstalled=`npm help` || missing=1
     if [[ $missing -ne 0 ]]; then
         errorcolorecho "This script requires Node/NPM for MacOS be installed."
         errorcolorecho "Please go to https://nodejs.org/en/download/ to install node."
@@ -122,19 +113,21 @@ function updateNode() {
 
 successcolorecho "Setting up for local development..."
 
-# Not using brew to manage npm
-# checkBrew
-# updateBrew
+if [ $UPDATE_BREW -eq 1 ]; then
+    checkBrew
+    updateBrew
+fi
+
+if [ $UPDATE_NODE -eq 1 ]; then
+    checkNpm
+    updateNpm
+    updateNode
+fi
 
 checkDockerForMac
 
-# No need for these ... running npm in docker
-checkNpm
-updateNpm
-updateNode
-
 docker image prune --force
 
-make run
-
 successcolorecho "Setting up for local development...done"
+alertcolorecho "Run \"make run\" to start up the application"
+echo ""
