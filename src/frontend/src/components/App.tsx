@@ -1,14 +1,17 @@
 import * as React from 'react';
 import Map from './Map';
-// import Test from './Test';
-import Test from '../containers/Test';
+import PersistentDrawer from '../containers/PersistentDrawer';
+class App extends React.Component<{}, {}> {
 
-class App extends React.Component {
+  constructor(props: {}) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
         <Map />
-        <Test />
+        <PersistentDrawer />
       </div>
     );
   }

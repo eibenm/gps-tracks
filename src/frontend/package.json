@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/redux-logger": "^3.0.5",
     "mapbox-gl": "^0.44.0",
+    "material-ui": "^1.0.0-beta.32",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -26,6 +27,7 @@
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
     "@types/react-redux": "^5.0.14",
+    "@types/redux-logger": "^3.0.5",
     "@types/redux-promise": "^0.5.28",
     "typescript": "^2.7.1"
   }

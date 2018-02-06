@@ -1,4 +1,4 @@
-import Test from '../components/Test';
+import PersistentDrawer from '../components/PersistentDrawer';
 import { AppAction, getTest } from '../actions/';
 import { AppState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default connect(mapStateToProps, mapDispatchToProps)(PersistentDrawer);
