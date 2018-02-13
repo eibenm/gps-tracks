@@ -11,7 +11,7 @@
     "react-redux": "^5.0.6",
     "react-scripts-ts": "2.13.0",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
+    "redux-form": "^7.2.3",
     "redux-promise": "^0.5.3"
   },
   "scripts": {
@@ -27,7 +27,7 @@
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
     "@types/react-redux": "^5.0.14",
-    "@types/redux-logger": "^3.0.5",
+    "@types/redux-form": "^7.0.13",
     "@types/redux-promise": "^0.5.28",
     "typescript": "^2.7.1"
   }

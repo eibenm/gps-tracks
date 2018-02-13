@@ -1,35 +1,33 @@
 import * as React from 'react';
 const mapboxgl = require('mapbox-gl');
 
-import {
-  MAPBOX_ACCESS_TOKEN,
-  MAPBOX_INIT_LAT,
-  MAPBOX_INIT_LNG
-} from '../constants/index';
+import { Constants } from '../constants/index';
 
-interface MapState {
+interface Props { }
+
+interface State {
   lat: number;
   lng: number;
   zoom: number;
 }
 
-mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = Constants.MAPBOX_ACCESS_TOKEN;
 
-class Map extends React.Component<{}, MapState> {
+class Map extends React.Component<Props, State> {
 
-  private mapContainer: HTMLDivElement;
+  private mapContainer: HTMLDivElement | null;
   private map: mapboxgl.Map;
   
-  constructor(props: {}) {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      lat: MAPBOX_INIT_LAT,
-      lng: MAPBOX_INIT_LNG,
+      lat: Constants.MAPBOX_INIT_LAT,
+      lng: Constants.MAPBOX_INIT_LNG,
       zoom: 12
     };
   }
 
-  componentDidMount(): void {
+  public componentDidMount(): void {
     const { lng, lat, zoom } = this.state;
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -45,10 +43,10 @@ class Map extends React.Component<{}, MapState> {
     });
   }
 
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return(
       <div>
-        <div ref={ref => this.mapContainer = ref as HTMLDivElement} id="map" />
+        <div ref={ref => this.mapContainer = ref} id="map" />
       </div>
     );
   }

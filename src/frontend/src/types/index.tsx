@@ -1,3 +1,6 @@
+import { FormReducer } from 'redux-form';
+
 export interface AppState {
-    test: {};
+    test: object;
+    form: FormReducer;
 }

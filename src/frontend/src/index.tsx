@@ -12,7 +12,7 @@ import rootReducer from './reducers/index';
 
 // middlewares
 import * as promiseMiddleware from 'redux-promise';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 
 // app
 import App from './components/App';
@@ -25,10 +25,10 @@ const middlewares: Array<Redux.Middleware> = [
   promiseMiddleware
 ];
 
-if (process.env.NODE_ENV === `development`) {
-  const loggerMiddleware: Redux.Middleware = createLogger();
-  middlewares.push(loggerMiddleware);
-}
+// if (process.env.NODE_ENV === `development`) {
+//   const loggerMiddleware: Redux.Middleware = createLogger();
+//   middlewares.push(loggerMiddleware);
+// }
 
 const store: Store<AppState> = createStore<AppState>(
   rootReducer,

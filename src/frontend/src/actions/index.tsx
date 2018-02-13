@@ -1,19 +1,19 @@
-import * as constants from '../constants';
+import * as actions from '../constants/actions';
 
-export interface GetTestAction {
-  type: constants.TEST;
+interface GetTestAction {
+  type: actions.TEST;
   payload: Promise<object>;
 }
 
-export interface GetTestAgainAction {
-  type: constants.TEST_AGAIN;
+interface GetTestAgainAction {
+  type: actions.TEST_AGAIN;
 }
 
 export type AppAction = GetTestAction | GetTestAgainAction;
 
 export const getTest = (): AppAction => {
   return {
-    type: constants.TEST,
+    type: actions.TEST,
     payload: fetch('http://localhost:82/test.php', {
       method: 'GET'
     }).then(response => response.json())
@@ -22,6 +22,6 @@ export const getTest = (): AppAction => {
 
 export const getTestAgain = (): AppAction => {
   return {
-    type: constants.TEST_AGAIN
+    type: actions.TEST_AGAIN
   };
 };

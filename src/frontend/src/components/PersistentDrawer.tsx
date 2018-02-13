@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { AppAction } from '../actions/index';
+import Form from './Form';
 
 // material-ui
 import Drawer from 'material-ui/Drawer';
@@ -39,24 +40,24 @@ class PersistentDrawer extends React.Component<Props, State> {
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
 
-  componentDidMount(): void {
+  public componentDidMount(): void {
     this.props.getTest();
   }
 
-  componentDidUpdate(): void {
+  public componentDidUpdate(): void {
     const { data } = this.props.test;
     if (data) {
       window.console.log(`recieved data: "${data}"`);
     }
   }
 
-  handleDrawerToggle(/*event: React.SyntheticEvent<EventTarget>*/): void {
+  public handleDrawerToggle(/*event: React.SyntheticEvent<EventTarget>*/): void {
     this.setState({
       open: !this.state.open
     });
   }  
 
-  render(): JSX.Element {
+  public render(): JSX.Element {
     return(
       <div>
         <Button
@@ -78,6 +79,7 @@ class PersistentDrawer extends React.Component<Props, State> {
             <Divider />
             <div>
               <p>Hello World Menu</p>
+              <Form />
             </div>
           </div>
         </Drawer>
