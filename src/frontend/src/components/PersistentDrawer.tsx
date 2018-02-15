@@ -77,10 +77,7 @@ class PersistentDrawer extends React.Component<Props, State> {
               </IconButton>
             </div>
             <Divider />
-            <div>
-              <p>Hello World Menu</p>
-              <Form />
-            </div>
+            <Form saveData={(data) => window.console.log('data', data)} />
           </div>
         </Drawer>
       </div>
