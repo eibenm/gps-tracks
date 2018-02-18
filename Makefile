@@ -29,3 +29,15 @@ pgadmin: ## Spin up the pgadmin container.
 .PHONY: pgadmin-down
 pgadmin-down: ## Spin down the pgadmin container.
 	@sh ./scripts/pgadmin-down.sh
+
+.PHONY: php-shell
+webhost-shell: ## Enter the php container
+	@sh ./scripts/connect-container.sh -s webhost
+
+.PHONY: react-shell
+react-shell: ## Enter the php container
+	@sh ./scripts/connect-container.sh -s react
+
+.PHONY: postgres-shell
+postgres-shell: ## Enter the php container
+	@sh ./scripts/connect-container.sh -s postgres

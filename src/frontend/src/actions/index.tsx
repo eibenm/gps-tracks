@@ -1,27 +1,60 @@
-import * as actions from '../constants/actions';
+import { GPXFormData } from '../components/Form';
 
-interface GetTestAction {
-  type: actions.TEST;
+export enum AppActionKeys {
+  TEST = 'TEST',
+  TEST_FULFILLED = 'TEST_FULFILLED',
+  NEW_GPX = 'NEW_GPX',
+  NEW_GPX_FULFILLED = 'NEW_GPX_FULFILLED',
+  OTHER_ACTION = '__any_other_action_type__'
+}
+
+export interface GetTestAction {
+  type: AppActionKeys.TEST | AppActionKeys.TEST_FULFILLED;
   payload: Promise<object>;
 }
 
-interface GetTestAgainAction {
-  type: actions.TEST_AGAIN;
+interface GetNewGpxAction {
+  type: AppActionKeys.NEW_GPX | AppActionKeys.NEW_GPX_FULFILLED;
+  payload: Promise<object>;
 }
 
-export type AppAction = GetTestAction | GetTestAgainAction;
+export interface OtherAction {
+  type: AppActionKeys.OTHER_ACTION;
+}
 
-export const getTest = (): AppAction => {
+export type AppActions = GetTestAction
+  | GetNewGpxAction
+  | OtherAction;
+
+// Test
+
+export const getTest = (): AppActions => {
+
+  const promise: Promise<object> = fetch('http://localhost:82/test.php', {
+    method: 'GET'
+  }).then(response => response.json());
+
   return {
-    type: actions.TEST,
-    payload: fetch('http://localhost:82/test.php', {
-      method: 'GET'
-    }).then(response => response.json())
+    type: AppActionKeys.TEST,
+    payload: promise
   };
 };
 
-export const getTestAgain = (): AppAction => {
+// GPX
+
+export const newGpx = (data: GPXFormData): AppActions => {
+
+  let formData = new FormData();
+  formData.append('name', data.name as string);
+  formData.append('file', data.file as File);
+
+  const promise: Promise<object> = fetch('http://localhost:82/gpx.php', {
+    method: 'POST',
+    body: formData
+  }).then(response => response.json());
+
   return {
-    type: actions.TEST_AGAIN
+    type: AppActionKeys.NEW_GPX,
+    payload: promise
   };
 };

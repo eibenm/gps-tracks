@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { AppAction } from '../actions/index';
-import Form from './Form';
+import { AppActions } from '../actions/index';
+import Form, { GPXFormData } from './Form';
 
 // material-ui
 import Drawer from 'material-ui/Drawer';
@@ -24,8 +24,10 @@ const styles: ReadonlyMap<string, React.CSSProperties> = new Map<string, React.C
 ]);
 
 interface Props {
-  test: { data: string };
-  getTest: () => AppAction;
+  test: { test: { data: string } };
+  gpx: { newGpxSuccess: boolean };
+  getTest: () => AppActions;
+  newGpx: (data: GPXFormData) => AppActions;
 }
 
 interface State {
@@ -38,6 +40,7 @@ class PersistentDrawer extends React.Component<Props, State> {
     super(props);
     this.state = { open: false };
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+    this.saveDataHandler = this.saveDataHandler.bind(this);
   }
 
   public componentDidMount(): void {
@@ -45,17 +48,28 @@ class PersistentDrawer extends React.Component<Props, State> {
   }
 
   public componentDidUpdate(): void {
-    const { data } = this.props.test;
-    if (data) {
-      window.console.log(`recieved data: "${data}"`);
+    
+    const { test } = this.props.test;
+    const { newGpxSuccess } = this.props.gpx;
+
+    if (test) {
+      window.console.log(`Test Action Message: ${test.data}`);
+    }
+
+    if (newGpxSuccess) {
+      window.console.log(`New GPX Sucess: ${newGpxSuccess}`);
     }
   }
 
-  public handleDrawerToggle(/*event: React.SyntheticEvent<EventTarget>*/): void {
+  public handleDrawerToggle(event: React.SyntheticEvent<EventTarget>): void {
     this.setState({
       open: !this.state.open
     });
-  }  
+  }
+
+  public saveDataHandler(data: GPXFormData) {
+    this.props.newGpx(data);
+  }
 
   public render(): JSX.Element {
     return(
@@ -77,7 +91,7 @@ class PersistentDrawer extends React.Component<Props, State> {
               </IconButton>
             </div>
             <Divider />
-            <Form saveData={(data) => window.console.log('data', data)} />
+            <Form saveData={this.saveDataHandler} />
           </div>
         </Drawer>
       </div>

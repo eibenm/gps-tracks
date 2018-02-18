@@ -1,162 +1,127 @@
+// react
 import * as React from 'react';
-
-// redux-form
-import {
-  reduxForm,
-  Field,
-  /*FormErrors,*/
-  InjectedFormProps,
-  FormSubmitHandler,
-  BaseFieldProps,
-  GenericForm,
-  Form as FForm
-} from 'redux-form';
-import { WrappedFieldProps , GenericField } from 'redux-form';
 
 // material-ui
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import FileUpload from 'material-ui-icons/FileUpload';
+import Typography from 'material-ui/Typography';
 
-const styles: ReadonlyMap<string, React.CSSProperties> = new Map<string, React.CSSProperties>([
-  ['container', {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginLeft: 8
-  }],
-  ['formTitle', {
-    fontSize: '20px',
-    fontWeight: 500
-  }],
-  ['button', {
-    marginTop: 8,
-    marginBottom: 8
-  }],
-  ['textField', {
-    marginTop: 8,
-    marginBottom: 8,
-    marginRight: 8,
-    width: 200
-  }],
-  ['displayNone', {
-    display: 'none'
-  }],
-  ['fileUploadIcon', {
-    marginLeft: 8
-  }]
-]);
-
-interface FormData {
-  name: string;
-  asshat?: string;
+interface Props {
+  saveData: (data: GPXFormData) => void;
 }
 
-interface FormProps {
-  saveData: (data: FormData) => void;
+export interface GPXFormData {
+  name: string | null;
+  file: File | null;
 }
 
-// const validate = (values: Readonly<FormData>): FormErrors<FormData> => {
-
-//   window.console.log('validate???');
-
-//   const errors: FormErrors<FormData> = {};
-
-//   if (values.name === undefined) {
-//     errors.name = 'name needed';
-//   }
-
-//   return errors;
-// };
-
-// -----------------------------------------
-
-interface MyFieldCustomProps {
-  placeholder?: string;
-  component: (field: MyFieldProps) => JSX.Element;
+interface GPXFormErrors {
+  nameError: string;
+  fileError: string;
 }
 
-type MyFieldProps = MyFieldCustomProps & WrappedFieldProps;
+type State = GPXFormData & GPXFormErrors;
 
-const FieldCustom = Field as new () => GenericField<MyFieldCustomProps>;
+class TrackForm extends React.Component<Props, State> {
 
-type FieldProps = BaseFieldProps<MyFieldCustomProps> & MyFieldCustomProps;
-
-const FieldCustomComp: React.StatelessComponent<FieldProps> = props => (
-  <FieldCustom {...props} component={props.component} />
-);
-
-// -----------------------------------------
-
-type InjectedProps = InjectedFormProps<FormData, FormProps>;
-
-class Form extends React.Component<FormProps & InjectedProps, {}> {
-
-  constructor(props: FormProps & InjectedProps) {
+  constructor(props: Props) {
     super(props);
+    this.onInputNameChange = this.onInputNameChange.bind(this);
+    this.onInputFileChange = this.onInputFileChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.state = {
+      name: null,
+      file: null,
+      nameError: '',
+      fileError: ''
+    };
   }
 
-  public handleSubmitCallback: FormSubmitHandler<FormData, {}> = (values): void => {
-    this.props.saveData(values as FormData);
+  public validate(): boolean {
+    this.setState({ nameError: (!this.state.name ? 'Required' : '') });
+    this.setState({ fileError: (!this.state.file ? 'Required' : '') });
+    return this.state.name !== null &&
+      this.state.name !== '' &&
+      this.state.file !== null;
   }
 
-  public renderInputField(field: MyFieldProps): JSX.Element {
-    return(
-      <div>
-        <TextField
-          label={field.placeholder}
-          placeholder={field.placeholder}
-          margin="normal"
-          style={styles.get('textField')}
-        />
-      </div>
-    );
+  public handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+
+    const data: GPXFormData = {
+      name: this.state.name,
+      file: this.state.file
+    };
+
+    if (this.validate()) {
+      this.props.saveData(data);
+    }
   }
 
-  public renderFileInputField(field: MyFieldProps): JSX.Element {
-    return(
-      <div>
-        <input accept=".gpx" id="raised-button-file" type="file" style={styles.get('displayNone')} />
-        <label htmlFor="raised-button-file">
-          <Button variant="raised" component="span" style={styles.get('button')} >
-            Upload GPX
-            <FileUpload style={styles.get('fileUploadIcon')} />
-          </Button>
-        </label>
-      </div>
-    );
+  public onInputNameChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    this.setState({
+      name: event.target.value
+    });
+  }
+
+  public onInputFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    this.setState({
+      file: event.target.files![0]
+    });
   }
 
   public render(): JSX.Element {
 
-    window.console.log('props', this.props);
+    const { nameError, fileError } = this.state;
 
-    const FormCustom = FForm as new () => GenericForm<FormData, {}>;
-
-    return (
-      <FormCustom
-        style={styles.get('container')}
-        onSubmit={this.props.handleSubmit(this.handleSubmitCallback)}
-      >
-        <p style={styles.get('formTitle')}>Upload Track</p>
-
-        <Field name="wwww" component="input" />
-
-        <FieldCustomComp name="name" component={this.renderInputField} placeholder="Track Name" />
-
-        {/* <FieldCustom name="name" component={this.renderInputField} placeholder="Track Name" /> */}
-        {/* <FieldCustom name="fileInput" component={this.renderFileInputField} /> */}
-
-        <div>
-          {/* <Button variant="raised" size="medium" color="primary">
-            Submit
-          </Button> */}
-          <input type="submit" />
-        </div>
-      </FormCustom>
+    return(
+      <div className="gpx-form-wrapper">
+        <Typography variant="title" className="gpx-form-title" noWrap={true}>
+          Upload GPX Track
+        </Typography>
+        
+        <form name="GPXForm" onSubmit={this.handleOnSubmit}>
+          <div>
+            <TextField
+              name="track"
+              label={nameError ? nameError : 'Track'}
+              error={nameError ? true : false}
+              placeholder="Track"
+              margin="normal"
+              onChange={this.onInputNameChange}
+            />
+          </div>
+          <div>
+            <Typography
+              variant="body1"
+              color="error"
+              style={{display: fileError ? 'block' : 'none'}}
+            >
+              Required
+            </Typography>
+            <input
+              name="file"
+              accept=".gpx"
+              id="raised-button-file"
+              type="file"
+              style={{display: 'none'}}
+              onChange={this.onInputFileChange}
+            />
+            <label htmlFor="raised-button-file">
+              <Button variant="raised" component="span" >
+                Upload GPX
+                <FileUpload />
+              </Button>
+            </label>
+          </div>
+          <div>
+            <Button variant="raised" color="primary" type="submit">Submit</Button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
 
-export default reduxForm<FormData, FormProps>({
-  form: 'GPXUploadForm'
-})(Form);
+export default TrackForm;

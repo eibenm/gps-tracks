@@ -3,5 +3,5 @@
 
 !/log/.gitkeep
 
-# misc
+/src/backend/uploads
 .DS_Store

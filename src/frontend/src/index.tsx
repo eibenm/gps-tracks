@@ -11,7 +11,8 @@ import { AppState } from './types/index';
 import rootReducer from './reducers/index';
 
 // middlewares
-import * as promiseMiddleware from 'redux-promise';
+// import * as promiseMiddleware from 'redux-promise';
+import * as promiseMiddleware from 'redux-promise-middleware';
 // import { createLogger } from 'redux-logger';
 
 // app
@@ -22,7 +23,7 @@ import './css/index.css';
 import './css/mapbox-gl.css';
 
 const middlewares: Array<Redux.Middleware> = [
-  promiseMiddleware
+  promiseMiddleware.default()
 ];
 
 // if (process.env.NODE_ENV === `development`) {
