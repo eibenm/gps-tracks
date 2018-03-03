@@ -101,3 +101,41 @@ SELECT
     jsonb_build_array(vals->1, vals->0)
 FROM coords
 
+-- Selecting all geojson point feature collections
+SELECT
+    t.tid AS id,
+    t.name,
+    geoms.geojson
+FROM (
+    SELECT
+        results.tid,
+        jsonb_build_object(
+            'type',     'FeatureCollection',
+            'features', jsonb_agg(jsonb_build_object(
+                'type',       'Feature',
+                'geometry',   results.geom::jsonb,
+                'properties', results.properties
+            ))
+        ) AS geojson
+    FROM (
+        SELECT
+            tid,
+            ST_AsGeoJSON(geom) AS geom,
+            properties AS properties
+        FROM track_geoms
+        ORDER BY geom_order
+    ) results
+    GROUP BY results.tid
+) AS geoms
+JOIN track AS t ON geoms.tid = t.tid
+ORDER BY t.name ASC, t.tid ASC
+
+-- Selecting linestring features
+SELECT
+    t.tid AS id,
+    t.name,
+    ST_AsGeoJSON(ST_MakeLine(g.geom ORDER BY g.geom_order)) AS geom
+FROM track t
+JOIN track_geoms g ON t.tid = g.tid
+GROUP BY t.name, t.tid
+ORDER BY t.name ASC, t.tid ASC;

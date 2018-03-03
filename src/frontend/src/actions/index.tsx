@@ -1,44 +1,30 @@
 import { GPXFormData } from '../components/Form';
 
 export enum AppActionKeys {
-  TEST = 'TEST',
-  TEST_FULFILLED = 'TEST_FULFILLED',
   NEW_GPX = 'NEW_GPX',
   NEW_GPX_FULFILLED = 'NEW_GPX_FULFILLED',
+  GET_GPX = 'GET_GPX',
+  GET_GPX_FULFILLED = 'GET_GPX_FULFILLED',
   OTHER_ACTION = '__any_other_action_type__'
 }
 
-export interface GetTestAction {
-  type: AppActionKeys.TEST | AppActionKeys.TEST_FULFILLED;
-  payload: Promise<object>;
-}
-
-interface GetNewGpxAction {
+interface NewGpxAction {
   type: AppActionKeys.NEW_GPX | AppActionKeys.NEW_GPX_FULFILLED;
   payload: Promise<object>;
 }
 
-export interface OtherAction {
+interface GetGpxAction {
+  type: AppActionKeys.GET_GPX | AppActionKeys.GET_GPX_FULFILLED;
+  payload: Promise<object>;
+}
+
+interface OtherAction {
   type: AppActionKeys.OTHER_ACTION;
 }
 
-export type AppActions = GetTestAction
-  | GetNewGpxAction
+export type AppActions = NewGpxAction
+  | GetGpxAction
   | OtherAction;
-
-// Test
-
-export const getTest = (): AppActions => {
-
-  const promise: Promise<object> = fetch('http://localhost:82/test.php', {
-    method: 'GET'
-  }).then(response => response.json());
-
-  return {
-    type: AppActionKeys.TEST,
-    payload: promise
-  };
-};
 
 // GPX
 
@@ -48,13 +34,28 @@ export const newGpx = (data: GPXFormData): AppActions => {
   formData.append('name', data.name as string);
   formData.append('file', data.file as File);
 
-  const promise: Promise<object> = fetch('http://localhost:82/gpx.php', {
+  const promise: Promise<object> = fetch('http://localhost:82/gpx_new.php', {
     method: 'POST',
     body: formData
-  }).then(response => response.json());
+  })
+  .then(response => response.json())
+  .catch(error => window.console.log(`Error: ${error}`));
 
   return {
     type: AppActionKeys.NEW_GPX,
+    payload: promise
+  };
+};
+
+export const getGpx = (): AppActions => {
+  const promise: Promise<object> = fetch('http://localhost:82/gpx_get.php', {
+    method: 'GET'
+  })
+  .then(response => response.json())
+  .catch(error => window.console.log(`Error: ${error}`));
+
+  return {
+    type: AppActionKeys.GET_GPX,
     payload: promise
   };
 };

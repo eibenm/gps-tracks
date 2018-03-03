@@ -16,7 +16,7 @@ import * as promiseMiddleware from 'redux-promise-middleware';
 // import { createLogger } from 'redux-logger';
 
 // app
-import App from './components/App';
+import App from './containers/App';
 
 // styles
 import './css/index.css';

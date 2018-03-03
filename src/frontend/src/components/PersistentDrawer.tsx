@@ -24,9 +24,7 @@ const styles: ReadonlyMap<string, React.CSSProperties> = new Map<string, React.C
 ]);
 
 interface Props {
-  test: { test: { data: string } };
   gpx: { newGpxSuccess: boolean };
-  getTest: () => AppActions;
   newGpx: (data: GPXFormData) => AppActions;
 }
 
@@ -43,19 +41,8 @@ class PersistentDrawer extends React.Component<Props, State> {
     this.saveDataHandler = this.saveDataHandler.bind(this);
   }
 
-  public componentDidMount(): void {
-    this.props.getTest();
-  }
-
   public componentDidUpdate(): void {
-    
-    const { test } = this.props.test;
     const { newGpxSuccess } = this.props.gpx;
-
-    if (test) {
-      window.console.log(`Test Action Message: ${test.data}`);
-    }
-
     if (newGpxSuccess) {
       window.console.log(`New GPX Sucess: ${newGpxSuccess}`);
     }

@@ -1,17 +1,31 @@
 import * as React from 'react';
-import Map from './Map';
+import Map, { Record } from './Map';
 import PersistentDrawer from '../containers/PersistentDrawer';
+import { AppActions } from '../actions/index';
 
-class App extends React.Component<{}, {}> {
+interface Props {
+  gpx: { records: Array<Record> };
+  getGpx: () => AppActions;
+}
 
-  constructor(props: {}) {
+interface State { }
+
+class App extends React.Component<Props, State> {
+
+  constructor(props: Props) {
     super(props);
+    this.getGpx = this.getGpx.bind(this);
   }
 
-  public render() {
+  public getGpx(): void {
+    this.props.getGpx();
+  }
+
+  public render(): JSX.Element {
+    const { records } = this.props.gpx;
     return (
       <div>
-        <Map />
+        <Map records={records} getGpx={this.getGpx} />
         <PersistentDrawer />
       </div>
     );

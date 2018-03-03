@@ -53,7 +53,7 @@ if (!move_uploaded_file($_FILES['file']['tmp_name'], $postFile)) {
     sendResponse(false);
 }
 
-// -------------------------- Save record to database
+// -------------------------- Converting gpx file to geojson
 
 $contents = file_get_contents($postFile);
 
@@ -86,6 +86,8 @@ foreach ($xml->trk->trkseg->trkpt as $trkpt) {
 
 $featureCollectionString = json_encode($featureCollection);
 
+// -------------------------- Setting up PDO
+
 $host = 'dns-postgres';
 $db = 'docker';
 $username = 'docker';
@@ -101,7 +103,7 @@ $opt = [
 
 $pdo = new PDO($dsn, $username, $password, $opt);
 
-// -------------------------- Insert into database
+// -------------------------- Save record to database
 
 $sql = "
 WITH inserted_track AS (
@@ -130,46 +132,3 @@ $stmt->bindParam(':name', $postName, PDO::PARAM_STR);
 $stmt->execute();
 
 sendResponse(true);
-
-// -------------------------- Select from database
-
-/*
-$sql = "
-SELECT jsonb_build_object(
-    'type',     'FeatureCollection',
-    'features', jsonb_agg(jsonb_build_object(
-        'type',       'Feature',
-        'geometry',   results.geom::jsonb,
-        'properties', results.properties
-    ))
-)
-FROM (
-    SELECT
-        ST_AsGeoJSON(geom) AS geom,
-        properties AS properties
-    FROM track_geoms
-    WHERE tid = 1
-    ORDER BY geom_order
-) results;
-";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$geojson = $stmt->fetchColumn();
-
-var_dump($geojson);
-print($geojson);
-
-
-// Return Response
-
-header('HTTP/1.1 200 OK');
-header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-header('Access-Control-Max-Age: 86400');    // cache for 1 day
-header('Access-Control-Allow-Methods: GET, POST');
-header('Content-Type: application/json');
-header('Content-Length: ' . strlen($json));
-echo json_encode(true);
-exit;
-
-*/
