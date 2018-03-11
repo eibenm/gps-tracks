@@ -1,10 +1,15 @@
 import * as React from 'react';
-import Map, { Record } from './Map';
-import PersistentDrawer from '../containers/PersistentDrawer';
+import Map from './Map';
+import { Track, GPXFormData, NewGpxCallback } from '../types/index';
+import PersistentDrawer from '../components/PersistentDrawer';
 import { AppActions } from '../actions/index';
 
 interface Props {
-  gpx: { records: Array<Record> };
+  gpx: {
+    newGpxSuccess: boolean
+    tracks: Array<Track>
+  };
+  newGpx: (data: GPXFormData, callback: NewGpxCallback) => AppActions;
   getGpx: () => AppActions;
 }
 
@@ -14,7 +19,23 @@ class App extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    this.newGpx = this.newGpx.bind(this);
     this.getGpx = this.getGpx.bind(this);
+  }
+
+  public componentDidMount(): void {
+    this.props.getGpx();
+  }
+
+  public componentDidUpdate(): void {
+    const { newGpxSuccess } = this.props.gpx;
+    if (newGpxSuccess) {
+      this.props.getGpx();
+    }
+  }
+
+  public newGpx(data: GPXFormData, callback: NewGpxCallback): void {
+    this.props.newGpx(data, callback);
   }
 
   public getGpx(): void {
@@ -22,11 +43,11 @@ class App extends React.Component<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { records } = this.props.gpx;
+    const { tracks } = this.props.gpx;
     return (
       <div>
-        <Map records={records} getGpx={this.getGpx} />
-        <PersistentDrawer />
+        <Map tracks={tracks} />
+        <PersistentDrawer tracks={tracks} newGpx={this.newGpx} />
       </div>
     );
   }

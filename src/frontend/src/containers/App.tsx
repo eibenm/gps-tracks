@@ -1,6 +1,6 @@
 import App from '../components/App';
-import { AppActions, getGpx } from '../actions/';
-import { AppState } from '../types/index';
+import { AppActions, newGpx, getGpx } from '../actions/';
+import { AppState, GPXFormData, NewGpxCallback } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
 
 const mapStateToProps = (state: AppState) => {
@@ -11,7 +11,8 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<AppActions>) => {
   return {
-    getGpx: () => dispatch(getGpx())
+    newGpx: (data: GPXFormData,  callback: NewGpxCallback) => dispatch(newGpx(data, callback)),
+    getGpx: () => dispatch(getGpx()),
   };
 };
 

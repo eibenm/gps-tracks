@@ -11,7 +11,6 @@ import { AppState } from './types/index';
 import rootReducer from './reducers/index';
 
 // middlewares
-// import * as promiseMiddleware from 'redux-promise';
 import * as promiseMiddleware from 'redux-promise-middleware';
 // import { createLogger } from 'redux-logger';
 

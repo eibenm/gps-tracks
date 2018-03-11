@@ -1,4 +1,4 @@
-import { GPXFormData } from '../components/Form';
+import { GPXFormData, NewGpxCallback } from '../types/index';
 
 export enum AppActionKeys {
   NEW_GPX = 'NEW_GPX',
@@ -10,7 +10,10 @@ export enum AppActionKeys {
 
 interface NewGpxAction {
   type: AppActionKeys.NEW_GPX | AppActionKeys.NEW_GPX_FULFILLED;
-  payload: Promise<object>;
+  payload: Promise<boolean>;
+  meta: {
+    callback: NewGpxCallback
+  };
 }
 
 interface GetGpxAction {
@@ -28,13 +31,13 @@ export type AppActions = NewGpxAction
 
 // GPX
 
-export const newGpx = (data: GPXFormData): AppActions => {
+export const newGpx = (data: GPXFormData, callback: NewGpxCallback): AppActions => {
 
   let formData = new FormData();
   formData.append('name', data.name as string);
   formData.append('file', data.file as File);
 
-  const promise: Promise<object> = fetch('http://localhost:82/gpx_new.php', {
+  const promise: Promise<boolean> = fetch('http://localhost:82/gpx_new.php', {
     method: 'POST',
     body: formData
   })
@@ -43,7 +46,10 @@ export const newGpx = (data: GPXFormData): AppActions => {
 
   return {
     type: AppActionKeys.NEW_GPX,
-    payload: promise
+    payload: promise,
+    meta: {
+      callback: callback
+    }
   };
 };
 

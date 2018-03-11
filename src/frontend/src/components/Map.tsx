@@ -3,17 +3,11 @@ import * as turf from '@turf/turf';
 const mapboxgl = require('mapbox-gl');
 // import * as mapboxgl from 'mapbox-gl';
 
+import { Track } from '../types/index';
 import { Constants } from '../constants/index';
 
-export interface Record {
-  id: number;
-  name: string;
-  geojson: string;
-}
-
 interface Props {
-  records: Array<Record>;
-  getGpx: () => void;
+  tracks: Array<Track>;
 }
 
 interface State {
@@ -28,6 +22,7 @@ class Map extends React.Component<Props, State> {
 
   public mapContainer: HTMLDivElement | null;
   public map: mapboxgl.Map;
+  public isLoaded: boolean;
 
   public mapSources: Array<string>;
   public mapLayers: Array<string>;
@@ -39,12 +34,12 @@ class Map extends React.Component<Props, State> {
       lng: Constants.MAPBOX_INIT_LNG,
       zoom: 12
     };
+    this.isLoaded = false;
   }
 
   public componentDidMount(): void {
 
     const { lng, lat, zoom } = this.state;
-    const { getGpx } = this.props;
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -54,29 +49,35 @@ class Map extends React.Component<Props, State> {
     } as mapboxgl.MapboxOptions);
 
     this.map.addControl(new mapboxgl.NavigationControl());
-    this.map.on('load', () => getGpx());
+    this.map.on('load', () => {
+      this.isLoaded = true;
+      this.checkRenderTracks();
+    });
 
     this.mapSources = [];
     this.mapLayers = [];
   }
   
   public componentDidUpdate(): void {
-    const { records } = this.props;
-    if (records && records.length !== 0) {
-      this.renderTracks(records);
+    this.checkRenderTracks();
+  }
+
+  public checkRenderTracks(): void {
+    const { tracks } = this.props;
+    if (tracks && tracks.length !== 0 && this.isLoaded === true) {
+      this.renderTracks(tracks);
     }
   }
 
-  public renderTracks(records: Array<Record>): void {
-    if (records.length > 0) {
-      this.removeSources();
-      this.removeLayers();
+  public renderTracks(tracks: Array<Track>): void {
+    if (tracks.length > 0) {
+      this.removeMapLayers();
       let bounds = new mapboxgl.LngLatBounds(null, null);
-      for (let i = 0; i < records.length; i++) {
-        const record = records[i];
+      for (let i = 0; i < tracks.length; i++) {
+        const record = tracks[i];
         const feature = JSON.parse(record.geojson);
         const sourceString = `track-source-${record.id}`;
-        const layerString = `track-lauyer-${record.id}`;
+        const layerString = `track-layer-${record.id}`;
         this.mapSources.push(sourceString);
         this.mapLayers.push(layerString);
         this.map.addSource(sourceString, {
@@ -109,18 +110,9 @@ class Map extends React.Component<Props, State> {
     }
   }
 
-  public removeSources() {
-    if (this.mapSources.length > 0) {
-      this.mapSources.forEach(source => this.map.removeSource(source));
-      this.mapSources = [];
-    }
-  }
-
-  public removeLayers() {
-    if (this.mapLayers.length > 0) {
-      this.mapLayers.forEach(layer => this.map.removeLayer(layer));
-      this.mapLayers = [];
-    }
+  public removeMapLayers() {
+    this.removeLayers();
+    this.removeSources();
   }
 
   public render(): JSX.Element {
@@ -129,6 +121,22 @@ class Map extends React.Component<Props, State> {
         <div ref={ref => this.mapContainer = ref} id="map" />
       </div>
     );
+  }
+
+  // Private
+
+  private removeSources() {
+    if (this.mapSources.length > 0) {
+      this.mapSources.forEach(source => this.map.removeSource(source));
+      this.mapSources = [];
+    }
+  }
+
+  private removeLayers() {
+    if (this.mapLayers.length > 0) {
+      this.mapLayers.forEach(layer => this.map.removeLayer(layer));
+      this.mapLayers = [];
+    }
   }
 }
 

@@ -7,13 +7,10 @@ import Button from 'material-ui/Button';
 import FileUpload from 'material-ui-icons/FileUpload';
 import Typography from 'material-ui/Typography';
 
+import { GPXFormData } from '../types/index';
+
 interface Props {
   saveData: (data: GPXFormData) => void;
-}
-
-export interface GPXFormData {
-  name: string | null;
-  file: File | null;
 }
 
 interface GPXFormErrors {
