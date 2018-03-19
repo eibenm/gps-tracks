@@ -1,14 +1,11 @@
 import * as React from 'react';
 import Map from './Map';
-import { Track, GPXFormData, NewGpxCallback } from '../types/index';
+import { Gpx, GPXFormData, NewGpxCallback } from '../types/index';
 import PersistentDrawer from '../components/PersistentDrawer';
 import { AppActions } from '../actions/index';
 
 interface Props {
-  gpx: {
-    newGpxSuccess: boolean
-    tracks: Array<Track>
-  };
+  gpx: Gpx;
   newGpx: (data: GPXFormData, callback: NewGpxCallback) => AppActions;
   getGpx: () => AppActions;
 }

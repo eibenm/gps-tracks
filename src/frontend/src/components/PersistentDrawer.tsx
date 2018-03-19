@@ -43,7 +43,7 @@ class PersistentDrawer extends React.Component<Props, State> {
     this.saveDataHandler = this.saveDataHandler.bind(this);
   }
 
-  public handleDrawerToggle(event: React.SyntheticEvent<EventTarget> | null): void {
+  public handleDrawerToggle(event?: React.SyntheticEvent<EventTarget>): void {
     this.setState({
       open: !this.state.open,
       showForm: false
@@ -59,7 +59,7 @@ class PersistentDrawer extends React.Component<Props, State> {
   public saveDataHandler(data: GPXFormData) {
     this.props.newGpx(data, (success) => {
       if (success === true) {
-        this.handleDrawerToggle(null);
+        this.handleDrawerToggle();
       }
     });
   }

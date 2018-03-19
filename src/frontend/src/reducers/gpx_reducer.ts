@@ -1,18 +1,22 @@
-import { AppActions, AppActionKeys } from '../actions/index';
+import { AppActions, AppActionTypes } from '../actions/index';
+import { AppState, initialState } from '../types/index';
 
 // These are equivalent
 // const newState = Object.assign({}, state, {test: action.payload});
 // const newState = {...state, test: action.payload};
 
-export default function(state: object = {}, action: AppActions ) {
+export default function(state: AppState = initialState, action: AppActions ) {
+
+  window.console.log(`>>> action.type: ${action.type}`);
+
   switch (action.type) {
-    case AppActionKeys.NEW_GPX_FULFILLED:
+    case AppActionTypes.NEW_GPX:
       const { callback } = action.meta;
       if (callback) {
         action.meta.callback(action.payload);
       }
       return Object.assign({}, state, {newGpxSuccess: action.payload});
-    case AppActionKeys.GET_GPX_FULFILLED:
+    case AppActionTypes.GET_GPX:
       return Object.assign({}, state, {newGpxSuccess: false, tracks: action.payload});
     default:
       return state;

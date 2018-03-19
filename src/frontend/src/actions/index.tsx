@@ -1,28 +1,29 @@
-import { GPXFormData, NewGpxCallback } from '../types/index';
+import {
+  AppAction,
+  CallbackMeta,
+  GPXFormData,
+  NewGpxCallback
+} from '../types/index';
 
-export enum AppActionKeys {
+export enum AppActionTypes {
   NEW_GPX = 'NEW_GPX',
-  NEW_GPX_FULFILLED = 'NEW_GPX_FULFILLED',
   GET_GPX = 'GET_GPX',
-  GET_GPX_FULFILLED = 'GET_GPX_FULFILLED',
   OTHER_ACTION = '__any_other_action_type__'
 }
 
-interface NewGpxAction {
-  type: AppActionKeys.NEW_GPX | AppActionKeys.NEW_GPX_FULFILLED;
+interface NewGpxAction extends AppAction<Promise<boolean>, CallbackMeta> {
+  type: AppActionTypes.NEW_GPX;
   payload: Promise<boolean>;
-  meta: {
-    callback: NewGpxCallback
-  };
+  meta: CallbackMeta;
 }
 
-interface GetGpxAction {
-  type: AppActionKeys.GET_GPX | AppActionKeys.GET_GPX_FULFILLED;
+interface GetGpxAction extends AppAction<Promise<object>, null> {
+  type: AppActionTypes.GET_GPX;
   payload: Promise<object>;
 }
 
-interface OtherAction {
-  type: AppActionKeys.OTHER_ACTION;
+interface OtherAction extends AppAction<null, null> {
+  type: AppActionTypes.OTHER_ACTION;
 }
 
 export type AppActions = NewGpxAction
@@ -41,11 +42,10 @@ export const newGpx = (data: GPXFormData, callback: NewGpxCallback): AppActions 
     method: 'POST',
     body: formData
   })
-  .then(response => response.json())
-  .catch(error => window.console.log(`Error: ${error}`));
+  .then(response => response.json());
 
   return {
-    type: AppActionKeys.NEW_GPX,
+    type: AppActionTypes.NEW_GPX,
     payload: promise,
     meta: {
       callback: callback
@@ -57,11 +57,10 @@ export const getGpx = (): AppActions => {
   const promise: Promise<object> = fetch('http://localhost:82/gpx_get.php', {
     method: 'GET'
   })
-  .then(response => response.json())
-  .catch(error => window.console.log(`Error: ${error}`));
+  .then(response => response.json());
 
   return {
-    type: AppActionKeys.GET_GPX,
+    type: AppActionTypes.GET_GPX,
     payload: promise
   };
 };

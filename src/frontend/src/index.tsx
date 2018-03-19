@@ -5,14 +5,13 @@ import registerServiceWorker from './registerServiceWorker';
 
 // redux
 import { Store, Provider } from 'react-redux';
-import * as Redux from 'redux';
+import { Middleware } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
-import { AppState } from './types/index';
+import { AppState, initialState } from './types/index';
 import rootReducer from './reducers/index';
 
 // middlewares
-import * as promiseMiddleware from 'redux-promise-middleware';
-// import { createLogger } from 'redux-logger';
+import { promiseMiddleware } from './middlewares/promise_middleware';
 
 // app
 import App from './containers/App';
@@ -21,17 +20,13 @@ import App from './containers/App';
 import './css/index.css';
 import './css/mapbox-gl.css';
 
-const middlewares: Array<Redux.Middleware> = [
-  promiseMiddleware.default()
+const middlewares: Array<Middleware> = [
+  promiseMiddleware()
 ];
-
-// if (process.env.NODE_ENV === `development`) {
-//   const loggerMiddleware: Redux.Middleware = createLogger();
-//   middlewares.push(loggerMiddleware);
-// }
 
 const store: Store<AppState> = createStore<AppState>(
   rootReducer,
+  initialState,
   applyMiddleware(...middlewares)
 );
 
