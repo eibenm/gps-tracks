@@ -1,8 +1,10 @@
 import * as React from 'react';
-import Map from './Map';
+// import Map from './Map';
 import { Gpx, GPXFormData, NewGpxCallback } from '../types/index';
-import PersistentDrawer from '../components/PersistentDrawer';
+// import PersistentDrawer from '../components/PersistentDrawer';
 import { AppActions } from '../actions/index';
+
+import Sidebar from './Sidebar';
 
 interface Props {
   gpx: Gpx;
@@ -10,14 +12,18 @@ interface Props {
   getGpx: () => AppActions;
 }
 
-interface State { }
+interface State {
+  sidebarOpen: boolean;
+}
 
 class App extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    this.state = { sidebarOpen: false };
     this.newGpx = this.newGpx.bind(this);
     this.getGpx = this.getGpx.bind(this);
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
   public componentDidMount(): void {
@@ -39,12 +45,35 @@ class App extends React.Component<Props, State> {
     this.props.getGpx();
   }
 
+  public onSetSidebarOpen(open: boolean): void {
+    this.setState({sidebarOpen: open});
+  }
+
   public render(): JSX.Element {
-    const { tracks } = this.props.gpx;
+    // const { tracks } = this.props.gpx;
+
+    var sidebarContent = <b>Sidebar content</b>;
+
     return (
       <div>
-        <Map tracks={tracks} />
-        <PersistentDrawer tracks={tracks} newGpx={this.newGpx} />
+        {/* <Map tracks={tracks} />
+        <PersistentDrawer tracks={tracks} newGpx={this.newGpx} /> */}
+        <Sidebar
+          sidebar={sidebarContent}
+          open={this.state.sidebarOpen}
+          onSetOpen={this.onSetSidebarOpen}
+        >
+          <span>
+            <a
+              href="#"
+              style={{textDecorationColor: 'none', color: 'black', padding: 8}}
+              onClick={() => { this.onSetSidebarOpen(true); }}
+            >
+            =
+            </a>
+            <span> React Sidebar</span>
+          </span>
+        </Sidebar>
       </div>
     );
   }
