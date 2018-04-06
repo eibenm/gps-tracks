@@ -1,6 +1,3 @@
-// Inspired By
-// https://github.com/balloob/react-sidebar
-
 import * as React from 'react';
 
 import './Sidebar.css';
@@ -8,7 +5,7 @@ import './Sidebar.css';
 interface Props {
   sidebar: JSX.Element;
   open: boolean;
-  onSetOpen: (open: boolean) => void;
+  onSetOpen: (event: React.SyntheticEvent<EventTarget>, open: boolean) => void;
 }
 
 interface State { }
@@ -22,7 +19,7 @@ class Sidebar extends React.Component<Props, State> {
 
   public overlayClicked(event: React.SyntheticEvent<EventTarget>): void {
     if (this.props.open) {
-      this.props.onSetOpen(false);
+      this.props.onSetOpen(event, false);
     }
   }
 
@@ -48,7 +45,7 @@ class Sidebar extends React.Component<Props, State> {
     return (
       <div className="sidebar-root">
         <div className="sidebar-sidebar" style={sidebarStyle}>
-          <div style={{width: 300, height: '100%', fontWeight: 300, backgroundColor: 'blue'}}>
+          <div style={{width: 300, height: '100%', fontWeight: 300, backgroundColor: 'white'}}>
             {this.props.sidebar}
           </div>
         </div>

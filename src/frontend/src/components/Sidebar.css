@@ -34,12 +34,6 @@
 }
 
 .sidebar-content {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    overflow-y: scroll;
     -webkit-transition: left 0.3s ease-out, right 0.3s ease-out;
          -o-transition: left 0.3s ease-out, right 0.3s ease-out;
             transition: left 0.3s ease-out, right 0.3s ease-out;

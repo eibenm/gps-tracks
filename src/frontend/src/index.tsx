@@ -7,8 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { Store, Provider } from 'react-redux';
 import { Middleware } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
-import { AppState, initialState } from './types/index';
-import rootReducer from './reducers/index';
+import { AppState, initialState } from './types';
+import rootReducer from './reducers';
 
 // middlewares
 import { promiseMiddleware } from './middlewares/promise_middleware';
@@ -19,6 +19,7 @@ import App from './containers/App';
 // styles
 import './css/index.css';
 import './css/mapbox-gl.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const middlewares: Array<Middleware> = [
   promiseMiddleware()

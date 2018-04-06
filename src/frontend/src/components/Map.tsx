@@ -3,8 +3,10 @@ import * as turf from '@turf/turf';
 const mapboxgl = require('mapbox-gl');
 // import * as mapboxgl from 'mapbox-gl';
 
-import { Track } from '../types/index';
-import { Constants } from '../constants/index';
+import { Track } from '../types';
+import { Constants } from '../constants';
+
+import './Map.css';
 
 interface Props {
   tracks: Array<Track>;
