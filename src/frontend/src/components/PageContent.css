@@ -1,4 +1,10 @@
 .menu-icon {
     z-index: 1;
     position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.navbar-toggler {
+    background-color: #343a40 !important;
 }

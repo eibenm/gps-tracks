@@ -8,60 +8,48 @@ interface Props {
   onSetOpen: (event: React.SyntheticEvent<EventTarget>, open: boolean) => void;
 }
 
-interface State { }
+const overlayClickedHandler = (event: React.MouseEvent<HTMLDivElement>, props: Props): void => {
+  if (props.open) {
+    props.onSetOpen(event, false);
+  }
+};
 
-class Sidebar extends React.Component<Props, State> {
-  
-  constructor(props: Props) {
-    super(props);
-    this.overlayClicked = this.overlayClicked.bind(this);
+const Sidebar: React.SFC<Props> = (props) => {
+
+  const sidebarStyle: React.CSSProperties = { };
+  const overlayStyle: React.CSSProperties = { };
+
+  if (props.open === true) {
+    sidebarStyle.transform = `translateX(0%)`;
+    sidebarStyle.WebkitTransform = `translateX(0%)`;
+    overlayStyle.opacity = 1;
+    overlayStyle.visibility = 'visible';
+  } else {
+    sidebarStyle.transform = 'translateX(-100%)';
+    sidebarStyle.WebkitTransform = 'translateX(-100%)';
+    sidebarStyle.boxShadow = '2px 2px 4px rgba(0, 0, 0, 0.15)';
+    sidebarStyle.WebkitBoxShadow = '2px 2px 4px rgba(0, 0, 0, 0.15)';
   }
 
-  public overlayClicked(event: React.SyntheticEvent<EventTarget>): void {
-    if (this.props.open) {
-      this.props.onSetOpen(event, false);
-    }
-  }
-
-  public render(): JSX.Element {
-
-    const sidebarStyle: React.CSSProperties = { };
-    const overlayStyle: React.CSSProperties = { };
-
-    if (this.props.open === true) {
-      // slide open sidebar
-      sidebarStyle.transform = `translateX(0%)`;
-      sidebarStyle.WebkitTransform = `translateX(0%)`;
-      // show overlay
-      overlayStyle.opacity = 1;
-      overlayStyle.visibility = 'visible';
-    } else {
-      sidebarStyle.transform = 'translateX(-100%)';
-      sidebarStyle.WebkitTransform = 'translateX(-100%)';
-      sidebarStyle.boxShadow = '2px 2px 4px rgba(0, 0, 0, 0.15)';
-      sidebarStyle.WebkitBoxShadow = '2px 2px 4px rgba(0, 0, 0, 0.15)';
-    }
-
-    return (
-      <div className="sidebar-root">
-        <div className="sidebar-sidebar" style={sidebarStyle}>
-          <div style={{width: 300, height: '100%', fontWeight: 300, backgroundColor: 'white'}}>
-            {this.props.sidebar}
-          </div>
-        </div>
-        <div
-          className="sidebar-overlay"
-          role="presentation"
-          tabIndex={0}
-          style={overlayStyle}
-          onClick={this.overlayClicked}
-        />
+  return(
+    <div className="sidebar-root">
+      <div className="sidebar-sidebar" style={sidebarStyle}>
         <div className="sidebar-content">
-          {this.props.children}
+          {/* Sidebar Content */}
+          {props.sidebar}
         </div>
       </div>
-    );
-  }
-}
+      <div
+        className="sidebar-overlay"
+        style={overlayStyle}
+        onClick={event => overlayClickedHandler(event, props)}
+      />
+      <div className="sidebar-page-content">
+        {/* Page Content */}
+        {props.children}
+      </div>
+    </div>
+  );
+};
 
 export default Sidebar;
