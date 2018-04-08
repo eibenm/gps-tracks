@@ -39,8 +39,12 @@ class App extends React.Component<Props, State> {
     }
   }
 
-  public newGpx(data: GPXFormData, callback: NewGpxCallback): void {
-    this.props.newGpx(data, callback);
+  public newGpx(data: GPXFormData): void {
+    this.props.newGpx(data, (success) => {
+      if (success === true) {
+        this.setState({sidebarOpen: false});
+      }
+    });
   }
 
   public getGpx(): void {
@@ -54,7 +58,7 @@ class App extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     const { tracks } = this.props.gpx;
-    const sidebarContent = <SidebarContent />;
+    const sidebarContent = <SidebarContent tracks={tracks} newGpx={this.newGpx} />;
 
     return (
       <div>

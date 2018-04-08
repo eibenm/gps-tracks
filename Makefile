@@ -35,9 +35,13 @@ webhost-shell: ## Enter the php container
 	@sh ./scripts/connect-container.sh -s webhost
 
 .PHONY: react-shell
-react-shell: ## Enter the php container
+react-shell: ## Enter the react container
 	@sh ./scripts/connect-container.sh -s react
 
 .PHONY: postgres-shell
-postgres-shell: ## Enter the php container
+postgres-shell: ## Enter the postgres container
 	@sh ./scripts/connect-container.sh -s postgres
+
+.PHONY: nuke-data
+nuke-data: ## Reset data in database
+	@sh ./scripts/nuke-data.sh
