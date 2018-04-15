@@ -58,11 +58,16 @@ class App extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     const { tracks } = this.props.gpx;
-    const sidebarContent = <SidebarContent tracks={tracks} newGpx={this.newGpx} />;
+    const sidebarContent = (
+      <SidebarContent
+        tracks={tracks}
+        newGpx={this.newGpx} 
+        sidebarOpen={this.state.sidebarOpen}
+      />
+    );
 
     return (
       <div>
-        {/* <PersistentDrawer tracks={tracks} newGpx={this.newGpx} /> */}
         <Sidebar
           sidebar={sidebarContent}
           open={this.state.sidebarOpen}

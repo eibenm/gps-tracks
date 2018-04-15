@@ -1,0 +1,9 @@
+.tracks-table th, .tracks-table td {
+    border-top: none !important;
+}
+
+.icon-eye {
+    width: 18px;
+    height: 18px;
+    vertical-align: text-bottom;
+}

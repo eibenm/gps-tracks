@@ -1,11 +1,13 @@
 import * as React from 'react';
 import NewTrackForm from './NewTrackForm';
+import SidebarTracksList from './SidebarTracksList';
 import { Button } from 'reactstrap';
 import { Track, GPXFormData } from '../types';
 
 interface Props {
   tracks: Array<Track>;
   newGpx: (data: GPXFormData) => void;
+  sidebarOpen: boolean;
 }
 
 interface State {
@@ -19,6 +21,14 @@ class SidebarContent extends React.Component<Props, State> {
     this.state = { showForm: false };
     this.handleShowForm = this.handleShowForm.bind(this);
     this.saveDataHandler = this.saveDataHandler.bind(this);
+  }
+
+  public componentDidUpdate() {
+    if (this.props.sidebarOpen === false && this.state.showForm === true) {
+      this.setState({
+        showForm: false
+      });
+    }
   }
 
   public handleShowForm(event: React.SyntheticEvent<EventTarget>): void {
@@ -66,23 +76,7 @@ class SidebarContent extends React.Component<Props, State> {
   }
 
   private renderTracksList(): JSX.Element {
-    let tracksList: Array<JSX.Element> = [];
-    const {tracks} = this.props;
-    if (tracks) {
-      tracksList = this.props.tracks.map(track => {
-        return(
-          <li key={track.id}>{track.name}</li>
-        );
-      });
-    }
-
-    return(
-      <div>
-        <ul>
-          {tracksList.length ? tracksList : 'No Tracks'}
-        </ul>
-      </div>
-    );
+    return <SidebarTracksList tracks={this.props.tracks} />;
   }
 }
 

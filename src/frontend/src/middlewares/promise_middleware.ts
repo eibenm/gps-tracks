@@ -4,13 +4,13 @@ import {
     Dispatch,
   } from 'redux';
   
-  import { AppState, AppAction } from '../types/index';
+  import { AppState, AppAction } from '../types';
   
   const promiseMiddlewareHandler = (api: MiddlewareAPI<AppState>) => 
     (next: Dispatch<AppState>) => 
       <P, M>(action: AppAction<P, M>) => {
   
-    window.console.log('will dispatch', action);
+    // window.console.log('will dispatch', action);
   
     if (action.payload instanceof Promise) {
       return action.payload.then((value) => {
