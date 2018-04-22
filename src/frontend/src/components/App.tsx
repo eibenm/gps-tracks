@@ -1,12 +1,10 @@
 import * as React from 'react';
-import Sidebar from './Sidebar';
-import SidebarContent from './SidebarContent';
-import PageContent from './PageContent';
-import { Gpx, GPXFormData, NewGpxCallback } from '../types/index';
+import Sidebar from '@src/components/Sidebar';
+import SidebarContent from '@src/components/SidebarContent';
+import PageContent from '@src/components/PageContent';
+import { Gpx, GPXFormData, NewGpxCallback } from '@src/types';
 
-// import PersistentDrawer from '../components/PersistentDrawer';
-
-import { AppActions } from '../actions/index';
+import { AppActions } from '@src/actions';
 
 interface Props {
   gpx: Gpx;

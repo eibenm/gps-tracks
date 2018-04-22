@@ -4,10 +4,10 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 
 // redux
-import { Store, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { Middleware } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
-import { AppState, initialState } from './types';
+// import { initialState } from './types';
 import rootReducer from './reducers';
 
 // middlewares
@@ -25,9 +25,8 @@ const middlewares: Array<Middleware> = [
   promiseMiddleware()
 ];
 
-const store: Store<AppState> = createStore<AppState>(
+const store = createStore(
   rootReducer,
-  initialState,
   applyMiddleware(...middlewares)
 );
 

@@ -37,3 +37,10 @@ docker run -p 5000:80 \
     -d dpage/pgadmin4
 
 # open web browser in localhost:5000
+
+# NPM ___________________________________________________________
+
+# npm packages used
+npm ls
+# npm packages that are outdated
+npm outdate
