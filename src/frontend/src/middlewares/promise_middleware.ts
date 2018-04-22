@@ -4,7 +4,7 @@ import {
     Dispatch,
   } from 'redux';
   
-  import { AppAction } from '../types';
+  import { AppAction } from '@src/types';
   
   const promiseMiddlewareHandler = (api: MiddlewareAPI) => 
     (next: Dispatch) => 

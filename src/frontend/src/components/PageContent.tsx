@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Map from './Map';
-import { Track } from '../types';
+import Map from '@src/components/Map';
+import { Track } from '@src/types';
 
-import './PageContent.css';
+import '@src/components/PageContent.css';
 
 interface Props {
   tracks: Array<Track>;

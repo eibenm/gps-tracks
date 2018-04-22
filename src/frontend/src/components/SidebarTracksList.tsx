@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Track } from '../types';
+import { Track } from '@src/types';
 import { Table } from 'reactstrap';
 
-import './SidebarTracksList.css';
+import '@src/components/SidebarTracksList.css';
 
-const viewIcon = require('../icons/eye.svg');
+const viewIcon = require('@src/icons/eye.svg');
 
 interface Props {
   tracks: Array<Track>;

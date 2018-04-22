@@ -9,8 +9,8 @@ import {
   FormText
 } from 'reactstrap';
 
-import { GPXFormData } from '../types';
-import './NewTrackForm.css';
+import { GPXFormData } from '@src/types';
+import '@src/components/NewTrackForm.css';
 
 interface Props {
   saveData: (data: GPXFormData) => void;

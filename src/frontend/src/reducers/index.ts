@@ -1,6 +1,6 @@
 import { combineReducers, ReducersMapObject } from 'redux';
 
-import gpx from './gpx_reducer';
+import gpx from '@src/reducers/gpx_reducer';
 
 const reducers: ReducersMapObject = {
   gpx: gpx

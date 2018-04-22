@@ -3,7 +3,7 @@ import {
   CallbackMeta,
   GPXFormData,
   NewGpxCallback
-} from '../types/index';
+} from '@src/types/index';
 
 export enum AppActionTypes {
   NEW_GPX = 'NEW_GPX',
