@@ -9,7 +9,7 @@ import {
   FormText
 } from 'reactstrap';
 
-import { GPXFormData } from '@src/types';
+import { GPXFormData } from '@src/store/gpx/types';
 import '@src/components/NewTrackForm.css';
 
 interface Props {

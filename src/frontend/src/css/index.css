@@ -3,16 +3,3 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
-
-.gpx-form-wrapper {
-  margin: 8px;
-}
-
-.gpx-form-title {
-  margin: 8px;
-}
-
-.gpx-form-wrapper form div {
-  margin-top: 8px;
-  margin-bottom: 8px;
-}

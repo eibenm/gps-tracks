@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Map from '@src/components/Map';
-import { Track } from '@src/types';
+import { Track } from '@src/store/gpx/types';
 
 import '@src/components/PageContent.css';
 

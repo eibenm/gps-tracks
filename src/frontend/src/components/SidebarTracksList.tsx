@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Track } from '@src/types';
 import { Table } from 'reactstrap';
 
+import { Track } from '@src/store/gpx/types';
 import '@src/components/SidebarTracksList.css';
 
 const viewIcon = require('@src/icons/eye.svg');

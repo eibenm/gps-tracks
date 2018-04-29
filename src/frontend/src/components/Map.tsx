@@ -3,7 +3,7 @@ import * as turf from '@turf/turf';
 const mapboxgl = require('mapbox-gl');
 // import * as mapboxgl from 'mapbox-gl';
 
-import { Track } from '@src/types';
+import { Track } from '@src/store/gpx/types';
 import { Constants } from '@src/constants';
 
 import '@src/components/Map.css';

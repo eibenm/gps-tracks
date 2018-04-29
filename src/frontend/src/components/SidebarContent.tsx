@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { Button } from 'reactstrap';
+
 import NewTrackForm from '@src/components/NewTrackForm';
 import SidebarTracksList from '@src/components/SidebarTracksList';
-import { Button } from 'reactstrap';
-import { Track, GPXFormData } from '@src/types';
+import { Track, GPXFormData } from '@src/store/gpx/types';
 
 interface Props {
   tracks: Array<Track>;

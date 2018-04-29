@@ -1,15 +1,15 @@
 import * as React from 'react';
+
 import Sidebar from '@src/components/Sidebar';
 import SidebarContent from '@src/components/SidebarContent';
 import PageContent from '@src/components/PageContent';
-import { Gpx, GPXFormData, NewGpxCallback } from '@src/types';
-
-import { AppActions } from '@src/actions';
+import { GPXState, GPXFormData, NewGpxCallback } from '@src/store/gpx/types';
+import { NewGPXAction, GetGPXAction } from '@src/store/gpx/types';
 
 interface Props {
-  gpx: Gpx;
-  newGpx: (data: GPXFormData, callback: NewGpxCallback) => AppActions;
-  getGpx: () => AppActions;
+  gpx: GPXState;
+  newGpx: (data: GPXFormData, callback: NewGpxCallback) => NewGPXAction;
+  getGpx: () => GetGPXAction;
 }
 
 interface State {

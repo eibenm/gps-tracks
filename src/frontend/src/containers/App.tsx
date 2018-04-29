@@ -1,7 +1,9 @@
-import App from '@src/components/App';
-import { AppActions, newGpx, getGpx } from '@src/actions/';
-import { AppState, GPXFormData, NewGpxCallback } from '@src/types/index';
 import { connect, Dispatch } from 'react-redux';
+
+import App from '@src/components/App';
+import { AppState, AppActions } from '@src/store';
+import { newGpx, getGpx } from '@src/store/gpx/actions';
+import { GPXFormData, NewGpxCallback } from '@src/store/gpx/types';
 
 const mapStateToProps = (state: AppState) => {
   return {
