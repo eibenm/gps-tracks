@@ -2,18 +2,18 @@
 // https://dev.to/resir014/a-type-safe-approach-to-redux-stores-in-typescript--5ajm
 
 import {
-  combineReducers, 
+  combineReducers,
+  Action,
   AnyAction,
-  Reducer,
-  Action
+  Reducer
 } from 'redux';
 
-import { GPXState, GPXActions } from '@src/store/gpx/types';
+import { GPXActions, GpxState } from '@src/store/gpx/types';
 import gpxReducer from '@src/store/gpx/reducer';
 
 // The top-level state object
 export interface AppState {
-  gpx: GPXState;
+  gpx: GpxState;
 }
 
 interface OtherAction extends Action {
@@ -21,8 +21,7 @@ interface OtherAction extends Action {
 }
 
 // The top-level actions type
-export type AppActions = GPXActions 
-  | OtherAction;
+export type AppActions = GPXActions | OtherAction;
 
 // Whenever an action is dispatched, Redux will update each top-level application state property
 // using the reducer with the matching name. It's important that the names match exactly, and that

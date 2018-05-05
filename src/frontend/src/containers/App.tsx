@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import App from '@src/components/App';
 import { AppState, AppActions } from '@src/store';
 import { newGpx, getGpx } from '@src/store/gpx/actions';
-import { GPXFormData, NewGpxCallback } from '@src/store/gpx/types';
+import { GpxFormData, NewGpxCallback } from '@src/store/gpx/types';
 
 const mapStateToProps = (state: AppState) => {
   return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<AppActions>) => {
   return {
-    newGpx: (data: GPXFormData,  callback: NewGpxCallback) => dispatch(newGpx(data, callback)),
+    newGpx: (data: GpxFormData,  callback: NewGpxCallback) => dispatch(newGpx(data, callback)),
     getGpx: () => dispatch(getGpx()),
   };
 };

@@ -9,11 +9,11 @@ import {
   FormText
 } from 'reactstrap';
 
-import { GPXFormData } from '@src/store/gpx/types';
+import { GpxFormData } from '@src/store/gpx/types';
 import '@src/components/NewTrackForm.css';
 
 interface Props {
-  saveData: (data: GPXFormData) => void;
+  saveData: (data: GpxFormData) => void;
 }
 
 interface GPXFormErrors {
@@ -25,7 +25,7 @@ interface NewTrackFormState {
   fileName: string;
 }
 
-type State = GPXFormData & GPXFormErrors & NewTrackFormState;
+type State = GpxFormData & GPXFormErrors & NewTrackFormState;
 
 class NewTrackForm extends React.Component<Props, State> {
 
@@ -58,7 +58,7 @@ class NewTrackForm extends React.Component<Props, State> {
   public handleOnSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    const data: GPXFormData = {
+    const data: GpxFormData = {
       name: this.state.name,
       file: this.state.file
     };

@@ -3,11 +3,11 @@ import { Button } from 'reactstrap';
 
 import NewTrackForm from '@src/components/NewTrackForm';
 import SidebarTracksList from '@src/components/SidebarTracksList';
-import { Track, GPXFormData } from '@src/store/gpx/types';
+import { Track, GpxFormData } from '@src/store/gpx/types';
 
 interface Props {
   tracks: Array<Track>;
-  newGpx: (data: GPXFormData) => void;
+  newGpx: (data: GpxFormData) => void;
   sidebarOpen: boolean;
 }
 
@@ -38,7 +38,7 @@ class SidebarContent extends React.Component<Props, State> {
     });
   }
 
-  public saveDataHandler(data: GPXFormData) {
+  public saveDataHandler(data: GpxFormData) {
     this.props.newGpx(data);
   }
 

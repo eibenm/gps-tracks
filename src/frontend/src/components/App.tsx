@@ -3,13 +3,13 @@ import * as React from 'react';
 import Sidebar from '@src/components/Sidebar';
 import SidebarContent from '@src/components/SidebarContent';
 import PageContent from '@src/components/PageContent';
-import { GPXState, GPXFormData, NewGpxCallback } from '@src/store/gpx/types';
-import { NewGPXAction, GetGPXAction } from '@src/store/gpx/types';
+import { GpxState, GpxFormData, NewGpxCallback } from '@src/store/gpx/types';
+import { NewGpxActionRequest, GetGpxActionRequest } from '@src/store/gpx/types';
 
 interface Props {
-  gpx: GPXState;
-  newGpx: (data: GPXFormData, callback: NewGpxCallback) => NewGPXAction;
-  getGpx: () => GetGPXAction;
+  gpx: GpxState;
+  newGpx: (data: GpxFormData, callback: NewGpxCallback) => NewGpxActionRequest;
+  getGpx: () => GetGpxActionRequest;
 }
 
 interface State {
@@ -37,7 +37,7 @@ class App extends React.Component<Props, State> {
     }
   }
 
-  public newGpx(data: GPXFormData): void {
+  public newGpx(data: GpxFormData): void {
     this.props.newGpx(data, (success) => {
       if (success === true) {
         this.setState({sidebarOpen: false});
