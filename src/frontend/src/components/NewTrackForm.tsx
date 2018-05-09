@@ -99,6 +99,7 @@ class NewTrackForm extends React.Component<Props, State> {
             invalid={nameInvalid}
             placeholder="New Track Name"
             onChange={this.onInputNameChange}
+            autoFocus={true}
           />
           <FormFeedback>Name required</FormFeedback>
         </FormGroup>
