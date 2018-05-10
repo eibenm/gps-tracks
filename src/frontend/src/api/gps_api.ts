@@ -5,26 +5,26 @@ export class GpsApi {
   private _baseUrl: string = 'http://localhost:82';
   public get baseUrl() { return this._baseUrl; }
 
-  public newGpx(data: GpxFormData): Promise<boolean> {
+  public async newGpxAsync(form: GpxFormData): Promise<boolean> {
     let formData = new FormData();
-    formData.append('name', data.name as string);
-    formData.append('file', data.file as File);
+    formData.append('name', form.name as string);
+    formData.append('file', form.file as File);
   
-    const promise: Promise<boolean> = fetch(`${this.baseUrl}/gpx_new.php`, {
+    const response: Response = await fetch(`${this.baseUrl}/gpx_new.php`, {
       method: 'POST',
       body: formData
-    })
-    .then(response => response.json());
+    });
+    const data: boolean = await response.json();
 
-    return promise;
+    return data;
   }
 
-  public getGpx(): Promise<object> {
-    const promise: Promise<object> = fetch(`${this.baseUrl}/gpx_get.php`, {
+  public async getGpxAsync(): Promise<object> {
+    const response: Response = await fetch(`${this.baseUrl}/gpx_get.php`, {
       method: 'GET'
-    })
-    .then(response => response.json());
-    
-    return promise;
+    });
+    const data: object = await response.json();
+
+    return data;
   }
 }

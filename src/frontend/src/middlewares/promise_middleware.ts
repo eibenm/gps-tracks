@@ -14,8 +14,6 @@ const promiseMiddlewareHandler = (api: MiddlewareAPI) =>
   (next: Dispatch) => 
     <P, M>(action: PromisMiddlewareAction<P, M>) => {
 
-  window.console.log('will dispatch', action);
-
   if (action.payload instanceof Promise) {
     return action.payload.then((value) => {
       const resolvedAction: PromisMiddlewareAction<P, M> = { type: action.type };

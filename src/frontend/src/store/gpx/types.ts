@@ -20,7 +20,7 @@ export interface GpxFormData {
   file: File | null;
 }
 
-export type NewGpxCallback = (success: Promise<boolean> | boolean) => void;
+export type NewGpxCallback = (success: boolean) => void;
 
 // Actions
 
@@ -48,7 +48,7 @@ export interface GetGpxActionRequest extends Action {
 
 export interface NewGpxAction extends Action {
   type: GpxActionTypes.NEW_GPX;
-  payload: Promise<boolean>;
+  payload: boolean;
   meta: {
     callback: NewGpxCallback;
   };
@@ -56,7 +56,7 @@ export interface NewGpxAction extends Action {
 
 export interface GetGpxAction extends Action {
   type: GpxActionTypes.GET_GPX;
-  payload: Promise<object>;
+  payload: object;
 }
 
 // GPXActions

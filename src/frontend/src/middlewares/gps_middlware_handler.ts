@@ -24,19 +24,31 @@ export class GpsMiddlewareHandler extends GpsApiHandler {
   public newGpx(api: MiddlewareAPI, action: AppAction<NewGpxMeta>): void {
     const data: GpxFormData = action.meta!.data;
     const callback: NewGpxCallback = action.meta!.callback;
-    api.dispatch<NewGpxAction>({
-      type: GpxActionTypes.NEW_GPX,
-      payload: this.gpsApi.newGpx(data),
-      meta: {
-        callback: callback
-      }
+    this.gpsApi.newGpxAsync(data).then(value => {
+      api.dispatch<NewGpxAction>({
+        type: GpxActionTypes.NEW_GPX,
+        payload: value,
+        meta: {
+          callback: callback
+        }
+      });
+    }, err => {
+      this.logError(err);
     });
   }
 
   public getGpx(api: MiddlewareAPI, action: AppAction<null>): void {
-    api.dispatch<GetGpxAction>({
-      type: GpxActionTypes.GET_GPX,
-      payload: this.gpsApi.getGpx()
+    this.gpsApi.getGpxAsync().then(value => {
+      api.dispatch<GetGpxAction>({
+        type: GpxActionTypes.GET_GPX,
+        payload: value
+      });
+    }, err => {
+      this.logError(err);
     });
+  }
+
+  private logError(err: Error) {
+    window.console.error(`Error: ${err}`);
   }
 }

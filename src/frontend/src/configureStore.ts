@@ -1,15 +1,16 @@
 import {
   createStore,
   applyMiddleware,
-  Store,
-  Middleware,
   AnyAction,
-  Dispatch
+  Dispatch,
+  Store,
+  Middleware
 } from 'redux';
 import { AppState, rootReducer } from '@src/store';
 import { gpsMiddleware } from '@src/middlewares/gps_middleware';
+import { loggingMiddleware } from '@src/middlewares/logging_middleware';
 import { GpsMiddlewareHandler } from '@src/middlewares/gps_middlware_handler';
-import { promiseMiddleware } from '@src/middlewares/promise_middleware';
+// import { promiseMiddleware } from '@src/middlewares/promise_middleware';
 import { GpsApi } from '@src/api/gps_api';
 
 export default function configureStore(initialState: AppState): Store<AppState> {
@@ -17,8 +18,9 @@ export default function configureStore(initialState: AppState): Store<AppState> 
   const gpsApi = new GpsApi();
 
   const middlewares: Array<Middleware> = [
+    loggingMiddleware(),
     gpsMiddleware(new GpsMiddlewareHandler(gpsApi)),
-    promiseMiddleware()
+    // promiseMiddleware()
   ];
 
   // We'll create our store with the combined reducers and the initial Redux state that
