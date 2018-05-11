@@ -30,18 +30,40 @@ pgadmin: ## Spin up the pgadmin container.
 pgadmin-down: ## Spin down the pgadmin container.
 	@sh ./scripts/pgadmin-down.sh
 
-.PHONY: php-shell
-webhost-shell: ## Enter the php container
-	@sh ./scripts/connect-container.sh -s webhost
-
-.PHONY: react-shell
-react-shell: ## Enter the react container
-	@sh ./scripts/connect-container.sh -s react
-
-.PHONY: postgres-shell
-postgres-shell: ## Enter the postgres container
-	@sh ./scripts/connect-container.sh -s postgres
-
 .PHONY: nuke-data
 nuke-data: ## Reset data in database
 	@sh ./scripts/nuke-data.sh
+
+.PHONY: connect-shell
+connect-shell: ## Connect to docker shell < make connect-shell for=(proxy,webhost,react,postgres) >
+ifeq (${for}, proxy)
+	@sh ./scripts/connect-container.sh -s proxy
+else ifeq (${for}, webhost)
+	@sh ./scripts/connect-container.sh -s webhost
+else ifeq (${for}, react)
+	@sh ./scripts/connect-container.sh -s react
+else ifeq (${for}, postgres)
+	@sh ./scripts/connect-container.sh -s postgres
+else
+	@echo ""
+	@echo "Use like: \033[1;96m\"make connect-shell for:<container>\"\033[0m"
+	@echo "Availible containers: \033[1;96m\"proxy\", \"webhost\", \"react\", \"postgres\"\033[0m"
+	@echo ""
+endif
+
+.PHONY: follow-logs
+follow-logs: ## Follow logs of container  < make follow-logs for=(proxy,webhost,react,postgres) >
+ifeq (${for}, proxy)
+	@sh ./scripts/container-logs.sh -s proxy
+else ifeq (${for}, webhost)
+	@sh ./scripts/container-logs.sh -s webhost
+else ifeq (${for}, react)
+	@sh ./scripts/container-logs.sh -s react
+else ifeq (${for}, postgres)
+	@sh ./scripts/container-logs.sh -s postgres
+else
+	@echo ""
+	@echo "Use like: \033[1;96m\"make follow-logs for:<container>\"\033[0m"
+	@echo "Availible containers: \033[1;96m\"proxy\", \"webhost\", \"react\", \"postgres\"\033[0m"
+	@echo ""
+endif

@@ -28,17 +28,9 @@ function infocolorecho() {
     echo $LIGHTCYAN"$@"$RESET
 }
 
-SHELLCONTAINERS=('react' 'proxy');
-ISSHELL=`echo ${SHELLCONTAINERS[*]} | grep "<$SHELL_OPTION>"`
-
 container=$(docker container ls --filter "name=$SHELL_OPTION" -q --latest)
-
 if [ $container ]; then
-    if [ "${ISSHELL}" != "" ]; then
-        docker exec -it $container /bin/sh
-    else
-        docker exec -it $container /bin/bash
-    fi
+    docker logs --follow $container
 else
     infocolorecho "$SHELL_OPTION container is not running"
     infocolorecho "Try running a \"make up\""
