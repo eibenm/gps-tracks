@@ -45,13 +45,28 @@ class Map extends React.Component<Props, State> {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/outdoors-v9',
+      // style: 'mapbox://styles/mapbox/outdoors-v10',
+      style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
       center: new mapboxgl.LngLat(lng, lat),
       zoom: zoom
     } as mapboxgl.MapboxOptions);
 
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.on('load', () => {
+
+      this.map.addSource('dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.terrain-rgb'
+      });
+
+      this.map.addLayer({
+          id: 'hillshading',
+          source: 'dem',
+          type: 'hillshade'
+      // insert below waterway-river-canal-shadow;
+      // where hillshading sits in the Mapbox Outdoors style
+      }, 'waterway-river-canal-shadow');
+
       this.isLoaded = true;
       this.checkRenderTracks();
     });
