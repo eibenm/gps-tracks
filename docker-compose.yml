@@ -15,16 +15,16 @@ services:
       - lamp-network
     restart: unless-stopped
 
-  # react:
-  #   build: ./config/react
-  #   image: custom-react
-  #   volumes:
-  #     - ./src/frontend:/usr/app
-  #   depends_on:
-  #     - webhost
-  #   networks:
-  #     - lamp-network
-  #   restart: unless-stopped
+  react:
+    build: ./config/react
+    image: custom-react
+    volumes:
+      - ./src/frontend:/usr/app
+    depends_on:
+      - webhost
+    networks:
+      - lamp-network
+    restart: unless-stopped
 
   webhost:
     build: ./config/php
