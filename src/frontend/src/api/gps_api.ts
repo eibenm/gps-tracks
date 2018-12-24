@@ -2,7 +2,7 @@ import { GpxFormData } from '@src/store/gpx/types';
 
 export class GpsApi {
 
-  private _baseUrl: string = 'http://localhost:82';
+  private _baseUrl: string = 'http://localhost:82/api/v1';
   public get baseUrl() { return this._baseUrl; }
 
   public async newGpxAsync(form: GpxFormData): Promise<boolean> {
@@ -10,7 +10,7 @@ export class GpsApi {
     formData.append('name', form.name as string);
     formData.append('file', form.file as File);
   
-    const response: Response = await fetch(`${this.baseUrl}/gpx_new.php`, {
+    const response: Response = await fetch(`${this.baseUrl}/new`, {
       method: 'POST',
       body: formData
     });
@@ -20,7 +20,7 @@ export class GpsApi {
   }
 
   public async getGpxAsync(): Promise<object> {
-    const response: Response = await fetch(`${this.baseUrl}/gpx_get.php`, {
+    const response: Response = await fetch(`${this.baseUrl}/get`, {
       method: 'GET'
     });
     const data: object = await response.json();

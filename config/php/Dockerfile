@@ -1,9 +1,16 @@
-FROM debian:stretch
+FROM ubuntu:18.04
+
+# Update package
+RUN apt-get update \
+    && apt-get full-upgrade -y \
+    && apt-get autoremove -y \ 
+    && apt-get clean all
 
 # Installing apache2
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends apache2 \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get install apache2 -y
+
+# Enable apache2 rewrite module
+RUN a2enmod rewrite
 
 # Suppressing apache 2 warning:
 # 
@@ -15,23 +22,20 @@ RUN { \
     echo ''; \
 } | tee -a /etc/apache2/apache2.conf
 
-# Registering package directory
-RUN echo "deb http://ftp.de.debian.org/debian stretch main" >> /etc/apt/sources.list
+# Install php 7.2
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    php \
+    php-pgsql \
+    php-curl \
+    php-mbstring \
+    php-odbc \
+    php-pgsql \
+    php-xml \
+    php-zip \
+    php-xdebug
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        php7.0 \
-        php7.0-pgsql \
-        php7.0-curl \
-        php7.0-mbstring \
-        php7.0-mcrypt \
-        php7.0-mysql \
-        php7.0-odbc \
-        php7.0-pgsql \
-        php7.0-sqlite3 \
-        php7.0-xml \
-        php7.0-zip \
-        php-xdebug
+# Make document root /var/www/html/public
+COPY 000-default.conf /etc/apache2/sites-available/
 
 WORKDIR /var/www/html
 

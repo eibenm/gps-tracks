@@ -4,7 +4,7 @@ services:
 
   proxy:
     build: ./config/nginx
-    image: custom-nginx
+    image: gps-nginx
     ports:
       - '81:3000'
       - '82:80'
@@ -12,42 +12,42 @@ services:
       - postgres
       - webhost
     networks:
-      - lamp-network
+      - gps-network
     restart: unless-stopped
 
   react:
     build: ./config/react
-    image: custom-react
+    image: gps-react
     volumes:
       - ./src/frontend:/usr/app
     depends_on:
       - webhost
     networks:
-      - lamp-network
+      - gps-network
     restart: unless-stopped
 
   webhost:
     build: ./config/php
-    image: custom-php
+    image: gps-php
     volumes:
       - ./log/apache2:/var/log/apache2
       - ./src/backend:/var/www/html
     depends_on:
       - postgres
     networks:
-      - lamp-network
+      - gps-network
     restart: unless-stopped
 
   postgres:
     build: ./config/postgres
-    image: custom-postgres
+    image: gps-postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./log/postgresql:/var/log/postgresql
     ports:
       - '5432:5432'  # This is just for pgAdmin access
     networks:
-      lamp-network:
+      gps-network:
         aliases:
           - dns-postgres
     restart: unless-stopped
@@ -56,4 +56,4 @@ volumes:
   pgdata:
 
 networks:
-  lamp-network:
+  gps-network:
