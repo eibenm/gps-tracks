@@ -35,7 +35,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     php-xdebug
 
 # Make document root /var/www/html/public
-COPY 000-default.conf /etc/apache2/sites-available/
+# COPY 000-default.conf /etc/apache2/sites-available/
 
 WORKDIR /var/www/html
 
